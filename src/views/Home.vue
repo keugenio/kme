@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="app">
     <Kumbotron />
     <AboutMeCards />
     <Footer />
@@ -8,13 +8,15 @@
 
 <script>
 // @ is an alias to /src
-import Kumbotron from '@/components/Kumbotron.vue'
-import Footer from '@/components/Footer.vue'
-import AboutMeCards from '@/components/AboutMeCards.vue'
+import Kumbotron from "@/components/Kumbotron.vue";
+import Footer from "@/components/Footer.vue";
+import AboutMeCards from "@/components/AboutMeCards.vue";
 export default {
   name: "home",
   components: {
-    Kumbotron, Footer, AboutMeCards
+    Kumbotron,
+    Footer,
+    AboutMeCards
   }
 };
 </script>
