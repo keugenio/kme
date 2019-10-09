@@ -14,18 +14,19 @@ export default {
 </script>
 
 <style lang="scss" scoped >
-  @import '../sass/main.scss';
-    .footer {
-      position: absolute;
-      bottom:0;
-      width: 100%;
-      padding:0;
-      font-size: 1.5rem;
-      text-align: center;
-      & .copyright {
-          padding:1rem;
-          background:$color-dark-blue;
-          color: $color-light-blue;
-      }
+  $color-light-blue: #e1f5fe;
+  $color-dark-blue:#0d47a1;
+  .footer {
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    padding:0;
+    font-size: 1.5rem;
+    text-align: center;
+    & .copyright {
+        padding:1rem;
+        background:$color-dark-blue;
+        color: $color-light-blue;
     }
+  }
 </style>

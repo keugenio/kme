@@ -7,12 +7,11 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "build:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt build",
-    "generate:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt generate",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
-    "compile:sass": "node-sass sass/main.scss static/main.css -w"
+    "compile:sass": "node-sass sass/main.scss assets/css/main.css -w",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
@@ -31,6 +30,7 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^6.1.0",
     "eslint-plugin-nuxt": ">=0.4.2",
+    "gh-pages": "^2.1.1",
     "nuxt-sass-resources-loader": "^2.0.5",
     "vue-style-loader": "^4.1.2"
   }

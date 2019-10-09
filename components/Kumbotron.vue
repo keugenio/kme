@@ -34,33 +34,35 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-    @import '../sass/main.scss';
-    .main-Container {
-        position:relative;
-    }
-    .lead {
-        font-size: 1.8rem;
-        color:$color-primary;
-    }
+  $color-primary:#0d47a1;
+  $color-dark-blue:#0d47a1;
 
-    .icons {
-        width:50%;
-        margin-right:auto;
-        margin-left:auto;
-        display: flex;
-        justify-content: space-evenly;
-        font-size: 36px;
-        padding:0px 10px;
-    }
-    .description {
-        display: flex;
-        justify-content: center;
-        width:100%;
-        font-size: 1.75rem;
-        margin-top:2rem;
-    }
-    .aloha {
-        text-transform: uppercase;
-        color:$color-dark-blue;
-    }
+  .main-Container {
+      position:relative;
+  }
+  .lead {
+      font-size: 1.8rem;
+      color:$color-primary;
+  }
+
+  .icons {
+      width:50%;
+      margin-right:auto;
+      margin-left:auto;
+      display: flex;
+      justify-content: space-evenly;
+      font-size: 36px;
+      padding:0px 10px;
+  }
+  .description {
+      display: flex;
+      justify-content: center;
+      width:100%;
+      font-size: 1.75rem;
+      margin-top:2rem;
+  }
+  .aloha {
+      text-transform: uppercase;
+      color:$color-dark-blue;
+  }
 </style>
