@@ -1,8 +1,8 @@
 export default {
-  mode: 'spa',
-  router: {
-    base: '/kme/'
-  },
+  mode: 'universal',
+  // router: {
+  //   base: '/kme/'
+  // },
   /*
   ** Headers of the page
   */
@@ -18,7 +18,7 @@ export default {
       { rel: 'stylesheet', type: 'text/css', href: 'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css' },
       { rel: 'stylesheet', type: 'text/css', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' },
       { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900' },
-      { rel: 'stylesheet', type: 'text/css', href: 'https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css' },
+      { rel: 'stylesheet', type: 'text/css', href: 'https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css' }
     ],
     script: [
       { src: 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js' },
@@ -40,7 +40,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/modals.js', ssr: false}
+    { src: '~/plugins/modals.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -69,11 +69,9 @@ export default {
     /*
     ** You can extend webpack config here
     */
-   vendor:['vue-js-modal'],
+    vendor: ['vue-js-modal'],
     extend (config, ctx) {
     }
   }
-  .extend.apply.routerBase,
+    .extend.apply.routerBase
 }
-
-

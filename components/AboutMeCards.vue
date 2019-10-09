@@ -12,6 +12,27 @@
         <a class="btn btn-large bg-canary border-dark-blue" target="_blank" href="Kui_Eugenio_resume.pdf">Download my Resume</a>
       </div>
     </div>
+    <!-- this website -->
+    <div class="card bg-success">
+      <div class="techIcons">
+        <i class="fab fa-vuejs" />
+        <i class="fab fa-html5" />
+        <i class="fab fa-css3" />
+        <i class="fab fa-node-js" />
+      </div>
+      <h2 class="title text-white">
+        kuieugenio.com
+      </h2>
+      <div class="profileImage profileImage4" />
+      <h4 class="card-text text-white">
+        This website was created as a Single Page Application with Vue.js and Nuxt.js.  After being generated as a static site, I use github to host it as a github page.
+      </h4>
+      <div class="card-footer  d-flex justify-content-around my-3">
+        <a href="https://github.com/keugenio/kme" class="btn btn-success border-dark-blue" target="_blank">
+          <i class="fab fa-github" aria-hidden="true" />
+        </a>
+      </div>
+    </div>
     <!-- pono -->
     <div class="card bg-info text-white">
       <blockquote class="card-blockquote">
@@ -23,34 +44,32 @@
         </footer>
       </blockquote>
     </div>
-    <!-- Marvel Hangman -->
+    <!-- profile image 1 -->
+    <div class="profileImage profileImage1" />
+    <!-- Clicky -->
     <div class="card bg-success">
       <div class="techIcons">
-        <i class="fab fa-vuejs" />
+        <i class="fab fa-react" />
         <i class="fab fa-html5" />
         <i class="fab fa-css3" />
         <i class="fab fa-node-js" />
       </div>
-      <img class="card-img-top" src="../assets/images/The_Marvel_Universe.png">
-      <div class="card-body rounded">
-        <h2 class="title text-white header-title">
-          Marvel Hangman
-        </h2>
-        <h4 class="card-text text-white">
-          A twist on a classical game where we utilize the Marvel Developer API to get random images, their corresponding names and descriptions from their entire library of characters.  The app is written in Vue and is a component of this site, a single file component written in Vue as well.
-        </h4>
-      </div>
-      <div class="card-footer d-flex justify-content-around my-3">
-        <button class="btn btn-success border-dark-blue" data-target="#hangman-modal" data-toggle="modal" type="button" @click="showModal('Marvel')">
+      <img class="card-img-top" src="../assets/images/clicky.png">
+      <h2 class="title text-white">
+        Clicky With Friends
+      </h2>
+      <h4 class="card-text text-white">
+        Memorization game written with React and utilizes the random.me api for images. The interface is simple and the game intuitive but the backend is challenging and complex.
+      </h4>
+      <div class="card-footer  d-flex justify-content-around my-3">
+        <button href="https://keugenio.github.io/clicky/" class="btn btn-success border-dark-blue" @click="showModal('Clicky')">
           Play
         </button>
-        <a href="https://github.com/keugenio/kuieugenio.com" class="btn btn-success border-dark-blue" target="_blank">
-          <i class="fab fa-github rounded" aria-hidden="true" />
+        <a href="https://github.com/keugenio/clicky" class="btn btn-success border-dark-blue" target="_blank">
+          <i class="fab fa-github" aria-hidden="true" />
         </a>
       </div>
     </div>
-    <!-- profile image 1 -->
-    <div class="profileImage profileImage1" />
     <!-- Ron Swanson -->
     <div class="card bg-success">
       <div class="card-block mb-3">
@@ -112,27 +131,29 @@
     </div>
     <!-- profile image3 -->
     <div class="profileImage profileImage3" />
-    <!-- Clicky -->
+    <!-- Marvel Hangman -->
     <div class="card bg-success">
       <div class="techIcons">
-        <i class="fab fa-react" />
+        <i class="fab fa-vuejs" />
         <i class="fab fa-html5" />
         <i class="fab fa-css3" />
         <i class="fab fa-node-js" />
       </div>
-      <img class="card-img-top" src="../assets/images/clicky.png">
-      <h2 class="title text-white">
-        Clicky With Friends
-      </h2>
-      <h4 class="card-text text-white">
-        Memorization game written with React and utilizes the random.me api for images. The interface is simple and the game intuitive but the backend is challenging and complex.
-      </h4>
-      <div class="card-footer  d-flex justify-content-around my-3">
-        <button href="https://keugenio.github.io/clicky/" class="btn btn-success border-dark-blue" @click="showModal('Clicky')">
+      <img class="card-img-top" src="../assets/images/The_Marvel_Universe.png">
+      <div class="card-body rounded">
+        <h2 class="title text-white header-title">
+          Marvel Hangman
+        </h2>
+        <h4 class="card-text text-white">
+          A twist on a classical game where we utilize the Marvel Developer API to get random images, their corresponding names and descriptions from their entire library of characters.  The app is written in Vue and is a component of this site, a single file component written in Vue as well.
+        </h4>
+      </div>
+      <div class="card-footer d-flex justify-content-around my-3">
+        <button class="btn btn-success border-dark-blue" data-target="#hangman-modal" data-toggle="modal" type="button" @click="showModal('Marvel')">
           Play
         </button>
-        <a href="https://github.com/keugenio/clicky" class="btn btn-success border-dark-blue" target="_blank">
-          <i class="fab fa-github" aria-hidden="true" />
+        <a href="https://github.com/keugenio/kuieugenio.com" class="btn btn-success border-dark-blue" target="_blank">
+          <i class="fab fa-github rounded" aria-hidden="true" />
         </a>
       </div>
     </div>
@@ -298,6 +319,9 @@ export default {
     }
     &.profileImage2 {
       background-image: url('../assets/images/bg.jpg');
+    }
+    &.profileImage4 {
+      background-image: url('../assets/images/profilepicture_sm.jpg');
     }
   }
 </style>
