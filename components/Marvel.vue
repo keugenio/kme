@@ -44,7 +44,7 @@
         </div>
         <div class="col-sm-6">
           <figure class="d-table">
-            <img ref="marvelCharacterImage" alt="character image" class="rounded align-self-center w-100 h-auto">
+            <img ref="marvelCharacterImage" alt="character image" class="rounded align-self-center marvelImage img-fluid">
             <figcaption ref="marvelCopyright" class="caption align-bottom text-center d-table-caption" />
           </figure>
         </div>
@@ -362,11 +362,15 @@ iframe {
   position: absolute;
 }
 .topZero {
-  margin-top:7rem;
+  margin-top:1rem;
 }
 .mainCol{
   & button {
     font-size: 2rem;
   }
+}
+.marvelImage {
+  max-width: 100%;
+  height: auto;
 }
 </style>

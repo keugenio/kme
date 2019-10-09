@@ -1,6 +1,6 @@
 <template>
-  <div class="col-12 100vw main-Container">
-    <div>
+  <div class="main-Container">
+    <div class="text-center">
       <h1 class="display-3">
         Kui Eugenio
       </h1>

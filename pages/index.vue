@@ -1,17 +1,20 @@
 <template>
-  <div class="container d-flex flex-column my-auto justify-content-center align-items-center">
+  <div class="container-fluid d-flex flex-column my-auto justify-content-center align-items-center position-relative">
     <Kumbotron />
+    <AboutMeCards />
     <Footer />
   </div>
 </template>
 
 <script>
 import Kumbotron from '../components/Kumbotron'
+import AboutMeCards from '../components/AboutMeCards'
 import Footer from '../components/Footer'
 
 export default {
   components: {
     Kumbotron,
+    AboutMeCards,
     Footer
   }
 }

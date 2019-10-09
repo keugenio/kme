@@ -1,1 +1,0 @@
-exports.ids=[3],exports.modules={37:function(t,e,r){"use strict";r.r(e);var o=r(1),component=Object(o.a)({},(function(){var t=this.$createElement;return(this._self._c||t)("div",[this._ssrNode(this._ssrEscape("product: "+this._s(this.$route.params.pid)))])}),[],!1,null,null,"522f763a");e.default=component.exports}};

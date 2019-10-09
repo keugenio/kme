@@ -2,20 +2,20 @@
   <div class="card-columns w-75 mx-auto">
     <!-- what I know -->
     <div class="card">
-      <h4 class="card-title text-darkblue">
+      <h4 class="title text-darkblue">
         <span class="title">What</span>&nbsp;I know
       </h4>
       <p class="card-text">
-        HTML 5.0, CSS 3.0, Bootstrap, JavaScript, SASS, node.js, jQuery, React.js, React-Native, Redux, Express, Vue, Vuex, MYSQL, JSON, XML and API development. Utilizes GitHub & GitLab for version control and Heroku for deployment.
+        HTML 5.0, CSS 3.0, Bootstrap, JavaScript, SASS, node.js, jQuery, React.js, React-Native, Redux, Express, Vue, Vuex, Nuxt, MYSQL, JSON, XML and API development. Utilizes GitHub & GitLab for version control and Heroku for deployment.
       </p>
       <div class="text-center my-3">
-        <a class="btn btn-large bg-canary border-dark-blue" target="_blank" href="assets/docs/Kui_Eugenio_resume.pdf">Download my Resume</a>
+        <a class="btn btn-large bg-canary border-dark-blue" target="_blank" href="../static/Kui_Eugenio_resume.pdf">Download my Resume</a>
       </div>
     </div>
     <!-- pono -->
     <div class="card bg-info text-white">
       <blockquote class="card-blockquote">
-        <p class="font-weight-bold font-italic">
+        <p class="title font-weight-bold font-italic">
           PONO
         </p>
         <footer>
@@ -31,9 +31,9 @@
         <i class="fab fa-css3" />
         <i class="fab fa-node-js" />
       </div>
-      <img class="card-img-top" src="../images/The_Marvel_Universe.png">
+      <img class="card-img-top" src="../static/The_Marvel_Universe.png">
       <div class="card-body rounded">
-        <h2 class="card-title text-white header-title">
+        <h2 class="title text-white header-title">
           Marvel Hangman
         </h2>
         <h4 class="card-text text-white">
@@ -60,14 +60,14 @@
           <i class="fab fa-css3" />
           <i class="fab fa-node-js" />
         </div>
-        <h2 class="card-title text-white">
+        <h2 class="title text-white">
           Quotes by Ron Swanson
         </h2>
         <h4 class="card-text text-white">
           Written in React and interacts with a PostgreSQL database hosted on Heroku. The app lets you rates quotes and tracks them by your IP address. Simple, humorous but highlights my backend and frontend skills.
         </h4>
       </div>
-      <img class="card-img-bottom" src="../images/ronSwanson.png">
+      <img class="card-img-bottom" src="../static/ronSwanson.png">
       <div class="card-footer d-flex justify-content-around my-3">
         <button class="btn btn-success border-dark-blue" data-target="#hangman-modal" data-toggle="modal" type="button" @click="showModal('RonSwanson')">
           Try it
@@ -79,8 +79,8 @@
     </div>
     <!-- WHERE am I from -->
     <div class="card">
-      <h4 class="card-title text-darkblue">
-        <span class="title">Where</span> am I from
+      <h4 class="title text-darkblue">
+        <span class="title">Where</span><span> am I from</span>
       </h4>
       <p class="card-text">
         I was born and raised on the island of Maui, the Valley Isle. I started my IT career upon graduating from the University of Hawaii for a telecom, quickly relocated to Southern California and finally laid my roots in the Valley of the Sun, AZ
@@ -90,8 +90,8 @@
     <div class="profileImage profileImage2" />
     <!-- What's next -->
     <div class="card">
-      <h4 class="card-title text-darkblue">
-        What's Next?
+      <h4 class="title text-darkblue">
+        <span class="title">What's</span> Next?
       </h4>
       <p class="card-text">
         Although successful in many years of Systems Admin and Application support, I've always wanted to explore the more creative side of technology.
@@ -102,7 +102,7 @@
     <!-- KŪLIA I KA NU‘U -->
     <div class="card bg-info text-white">
       <blockquote class="card-blockquote">
-        <p class="font-weight-bold font-italic">
+        <p class="title">
           KŪLIA I KA NU‘U
         </p>
         <footer>
@@ -120,8 +120,8 @@
         <i class="fab fa-css3" />
         <i class="fab fa-node-js" />
       </div>
-      <img class="card-img-top" src="../images/clicky.png">
-      <h2 class="card-title text-white">
+      <img class="card-img-top" src="../static/clicky.png">
+      <h2 class="title text-white">
         Clicky With Friends
       </h2>
       <h4 class="card-text text-white">
@@ -147,6 +147,11 @@ import Marvel from './Marvel'
 
 export default {
   name: 'AboutMeCards',
+  data () {
+    return {
+      showEditModal: false
+    }
+  },
   methods: {
     showModal (modalName) {
       const w = 0.9 * window.innerWidth
@@ -206,10 +211,14 @@ export default {
     font-size: 1.5rem;
     background-color: rgba($color-yellow,.5);
     word-wrap:break-word;
-
-    & .card-title {
-      font-size: 1.8rem;
+    & .title {
+      font-size: 2rem;
       font-weight: 600;
+      font-style: italic;
+      color: $color-dark-blue;
+      display: inline;
+      text-transform: uppercase;
+      letter-spacing: .15rem;
     }
     & .card-img-top, .card-img-bottom {
       max-width: 100%;
@@ -280,14 +289,13 @@ export default {
     margin-left:auto;
     margin-right: auto;
     &.profileImage1 {
-      background-image: url('../images/paddling_1.jpg');
+      background-image: url('../static/paddling_1.jpg');
     }
     &.profileImage3 {
-      background-image: url('../images/paddling_2.jpg');
+      background-image: url('../static/paddling_2.jpg');
     }
     &.profileImage2 {
-      background-image: url('../images/bg.jpg');
+      background-image: url('../static/bg.jpg');
     }
   }
-
 </style>

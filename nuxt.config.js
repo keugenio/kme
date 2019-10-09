@@ -23,7 +23,7 @@ export default {
       { rel: 'stylesheet', type: 'text/css', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' },
       { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900' },
       { rel: 'stylesheet', type: 'text/css', href: 'https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css' },
-      { rel: 'stylesheet', type: 'text/css', href: '/kme/main.css' }
+      { rel: 'stylesheet', type: 'text/css', href: '/main.css' }
     ],
     script: [
       { src: 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js' },
@@ -45,6 +45,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~/plugins/modals.js', ssr: false}
   ],
   /*
   ** Nuxt.js dev-modules
@@ -58,7 +59,8 @@ export default {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/bulma'
   ],
   /*
   ** Axios module configuration
@@ -73,8 +75,11 @@ export default {
     /*
     ** You can extend webpack config here
     */
+   vendor:['vue-js-modal'],
     extend (config, ctx) {
     }
   }
   .extend.apply.routerBase,
 }
+
+
