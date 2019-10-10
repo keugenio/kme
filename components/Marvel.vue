@@ -110,7 +110,7 @@ export default {
       self.startsWith = this.randomLetter()
       self.offset = this.getOffSet(this.startsWith)
 
-      const htmlCall = 'http://gateway.marvel.com/v1/public/characters?' +
+      const htmlCall = 'https://gateway.marvel.com/v1/public/characters?' +
                       'nameStartsWith=' + self.startsWith +
                       '&offset=' + self.offset +
                       '&ts=' + 1 +
