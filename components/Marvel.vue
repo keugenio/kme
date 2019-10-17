@@ -9,18 +9,13 @@
       </button>
     </div>
     <div class="modal-body">
-      <div v-if="showButton" class="mx-auto">
-        <button class="fa-5x mx-auto btn-success px-5" @click="newGame">
-          <i class="fa fa-play-circle" />
-        </button>
-      </div>
-      <div v-else class="mx-auto fa-5x" :class="[!hideOffScreen ? 'topZero' : 'topMinusNineThousand']">
+      <div v-if="!hideOffScreen" class="mx-auto fa-5x">
         <i class="fa fa-cog fa-spin text-primary" />
         <p style="font-size:2rem">
           downloading character information from Marvel Studios. Please be patient...
         </p>
       </div>
-      <div class="row mainCol" :class="[hideOffScreen ? 'topZero' : 'topMinusNineThousand']">
+      <div v-else class="row mainCol">
         <div class="col-sm-6">
           <p>Guess the Marvel comic character name.</p>
           <p v-if="gameInProgress" id="instructions">
@@ -30,13 +25,16 @@
             Current Guess:
           </div>
           <div ref="marvelCharacter" class="text-center">
-            loading...
+            {{ guessArray.join('') }}
           </div>
           <div ref="description">
-            if nothing loads, Marvel server may be busy. Try again.
+            {{ description }}
           </div>
           <hr>
-          <div ref="messageboard" />
+          <div>
+            <p v-text="messageboard1" />
+            <p v-text="messageboard2" />
+          </div>
           <hr>
           <button ref="btnReload" class="btn box-shadow btn-primary" @click="resetGame">
             Reload
@@ -44,8 +42,10 @@
         </div>
         <div class="col-sm-6">
           <figure class="d-table">
-            <img ref="marvelCharacterImage" alt="character image" class="rounded align-self-center marvelImage img-fluid">
-            <figcaption ref="marvelCopyright" class="caption align-bottom text-center d-table-caption" />
+            <img ref="marvelCharacterImage" alt="character image" class="rounded align-self-center marvelImage img-fluid" :src="src">
+            <figcaption ref="marvelCopyright" class="caption align-bottom text-center d-table-caption">
+              {{ copyright }}
+            </figcaption>
           </figure>
         </div>
       </div><!-- row -->
@@ -53,6 +53,8 @@
   </div>
 </template>
 <script>
+
+import { mapGetters } from 'vuex'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import marvelKeys from './marvelKeys'
@@ -74,23 +76,34 @@ export default {
       allGuessArray: [],
       incorrectGuessAmt: 0,
       guessedLetter: '',
-      description: '',
+      description: 'if nothing loads, Marvel server may be busy. Try again.',
       wikiURL: '',
-      showButton: true,
       hideOffScreen: false,
-      gameInProgress: 'true'
+      gameInProgress: 'true',
+      copyright: this.$store.state.copyright,
+      src: '',
+      messageboard1: '',
+      messageboard2: ''
     }
   },
+  computed: {
+    ...mapGetters(
+      { availableCharacters: 'availableCharacters' }
+    )
+  },
   mounted () {
+    this.startGame()
     const self = this
     window.addEventListener('keyup', function (ev) {
       self.keyMonitor(ev) // declared in your component methods
     })
+    this.getMoreCharacters()
   },
   methods: {
     resetGame () {
       this.hideOffScreen = false
-      this.$refs.messageboard.innerHTML = ''
+      this.messageboard1 = ''
+      this.messageboard2 = ''
       this.randomCharacterName = 0
       this.randomCharacterNameLength = 0
       this.randomIndex = Math.floor((Math.random() * 20) + 1)
@@ -103,41 +116,58 @@ export default {
       this.wikiURL = ''
       this.newGame()
     },
-    newGame () {
-      const self = this
-      self.gameInProgress = true
-      self.showButton = false
-      self.startsWith = this.randomLetter()
-      self.offset = this.getOffSet(this.startsWith)
+    startGame () {
+      const results = this.availableCharacters
+      this.randomIndex = Math.floor((Math.random() * results.length) + 1)
+      this.src = results[this.randomIndex].thumbnail.path + '/portrait_uncanny.jpg'
 
+      this.hideOffScreen = true
+      this.wikiURL = results[this.randomIndex].urls[0].url
+      this.randomCharacterName = results[this.randomIndex].name.toLowerCase()
+      this.description = results[this.randomIndex].description || 'no description provided by Marvel API'
+      this.answerArray = this.randomCharacterName.split('')
+      // this.convertToLowerCase(this.answerArray)
+      this.setupGuessArray()
+      // this.$refs.marvelCharacterImage.src = characterImage
+      // this.$refs.marvelCharacter.innerHTML = this.guessArray.join('')
+      // this.$refs.description.innerHTML = this.description
+    },
+    getMoreCharacters () {
+      const self = this
+      this.startsWith = this.randomLetter()
+      this.offset = this.getOffSet(this.startsWith)
       const htmlCall = 'https://gateway.marvel.com/v1/public/characters?' +
-                      'nameStartsWith=' + self.startsWith +
-                      '&offset=' + self.offset +
+                      'nameStartsWith=' + this.startsWith +
+                      '&offset=' + this.offset +
                       '&ts=' + 1 +
-                      '&apikey=' + self.publickey +
-                      '&hash=' + self.hash
+                      '&apikey=' + this.publickey +
+                      '&hash=' + this.hash
 
       axios.get(htmlCall)
         .then(function (downloadedJSON) {
-        // filter out the characters that don't have a picture
-          const results = downloadedJSON.data.data.results.filter(marvel => marvel.thumbnail.path !== 'http://i.annihil.us/u/prod/marvel/i/mg/2/70/5239be7020a11' && marvel.thumbnail.path !== 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available')
-          self.randomIndex = Math.floor((Math.random() * results.length) + 1)
-          const characterImage = results[self.randomIndex].thumbnail.path + '/portrait_uncanny.jpg'
-          const copyright = downloadedJSON.data.attributionHTML
-
-          self.hideOffScreen = true
-          self.wikiURL = results[self.randomIndex].urls[0].url
-          self.randomCharacterName = results[self.randomIndex].name
-          self.description = results[self.randomIndex].description || 'no description provided by Marvel API'
-          self.answerArray = self.randomCharacterName.split('')
-          self.convertToLowerCase(self.answerArray)
-          self.setupGuessArray()
-
-          self.$refs.marvelCharacterImage.src = characterImage
-          self.$refs.marvelCharacter.innerHTML = self.guessArray.join('')
-          self.$refs.marvelCopyright.innerHTML = copyright
-          self.$refs.description.innerHTML = self.description
+          self.$store.dispatch('setCharacters', { payload: downloadedJSON.data.data.results })
+          self.$store.dispatch('setCopyright', { payload: downloadedJSON.data.copyright })
         })
+    },
+    newGame () {
+      this.gameInProgress = true
+      const results = this.$store.getters.availableCharacters
+      this.randomIndex = Math.floor((Math.random() * results.length) + 1)
+      const characterImage = results[this.randomIndex].thumbnail.path + '/portrait_uncanny.jpg'
+      const copyright = this.$store.copyright
+
+      this.hideOffScreen = true
+      this.wikiURL = results[this.randomIndex].urls[0].url
+      this.randomCharacterName = results[this.randomIndex].name
+      this.description = results[this.randomIndex].description || 'no description provided by Marvel API'
+      this.answerArray = this.randomCharacterName.split('')
+      this.convertToLowerCase(this.answerArray)
+      this.setupGuessArray()
+
+      this.$refs.marvelCharacterImage.src = characterImage
+      this.$refs.marvelCharacter.innerHTML = this.guessArray.join('')
+      this.$refs.marvelCopyright.innerHTML = copyright
+      this.$refs.description.innerHTML = this.description
     },
     isValidKey (str) {
       return str.length === 1 && str.match(/[0-9a-z]/i)
@@ -245,10 +275,8 @@ export default {
       this.guessArray = temp
     },
     evaluateGuess (guess) {
-      const self = this
       const indexOfGuess = this.answerArray.indexOf(guess)
-
-      if (self.randomCharacterNameLength === 0) {
+      if (this.randomCharacterNameLength === 0) {
         Swal.fire({
           title: 'Something went wrong... ',
           text: 'The character info was not downloaded correctly, please try again.',
@@ -265,24 +293,24 @@ export default {
             }
           }
           if (this.randomCharacterNameLength === 0) {
+            this.getMoreCharacters()
             Swal.fire({
               title: 'You guessed it!',
               text: this.randomCharacterName,
               type: 'success',
               confirmButtonText: 'Cool'
             })
-            // self.onkeyup = null;
 
-            self.$refs.description.innerHTML = this.randomCharacterName
+            this.$refs.description.innerHTML = this.randomCharacterName
             if (this.description !== 'no description provided by Marvel API') {
-              self.$refs.description.innerHTML += ': ' + this.description
+              this.$refs.description.innerHTML += ': ' + this.description
             } else {
-              self.$refs.description.innerHTML += "<a href='" + this.wikiURL + "' target='blank'>" + ' (more info)' + '</a> '
+              this.$refs.description.innerHTML += "<a href='" + this.wikiURL + "' target='blank'>" + ' (more info)' + '</a> '
             }
 
-            self.$refs.guessType.innerHTML = ''
+            this.$refs.guessType.innerHTML = ''
           }
-          self.$refs.marvelCharacter.innerHTML = this.guessArray.join('')
+          this.$refs.marvelCharacter.innerHTML = this.guessArray.join('')
         }
         // only update incorrect guess amount for new guesses
         if (this.allGuessArray.indexOf(guess) <= 0) {
@@ -301,10 +329,8 @@ export default {
     },
     // updates incorrect guessed amount and all letters chosen so far
     updateMessageBoard () {
-      let message = ''
-      message += '<p> Incorrect guessed amount: ' + this.incorrectGuessAmt + '<br>'
-      message += 'All guessed letters: ' + this.allGuessArray.toString() + '<br></p>'
-      this.$refs.messageboard.innerHTML = message
+      this.messageboard1 = 'Incorrect guessed amount: ' + this.incorrectGuessAmt
+      this.messageboard2 = 'All guessed letters: ' + this.allGuessArray.toString()
     },
 
     // takes given array and returns as string

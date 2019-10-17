@@ -7,15 +7,29 @@
 </template>
 
 <script>
+// import { mapGetters } from 'vuex'
 import Kumbotron from '../components/Kumbotron'
 import AboutMeCards from '../components/AboutMeCards'
 import Footer from '../components/Footer'
+import apiReturn from './marvelCharacters'
 
 export default {
   components: {
     Kumbotron,
     AboutMeCards,
     Footer
+  },
+  data () {
+    return {
+      characters: apiReturn.data.results,
+      copyright: apiReturn.copyright
+    }
+  },
+  async mounted () {
+    await setTimeout(() => {
+      this.$store.dispatch('setCharacters', { payload: this.characters })
+    }, 5000)
+    this.$store.dispatch('setCopyright', { payload: this.copyright })
   }
 }
 </script>

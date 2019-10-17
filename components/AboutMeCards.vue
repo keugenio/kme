@@ -88,7 +88,13 @@
       </div>
       <img class="card-img-bottom" src="../assets/images/ronSwanson.png">
       <div class="card-footer d-flex justify-content-around my-3">
-        <button class="btn btn-success border-dark-blue" data-target="#hangman-modal" data-toggle="modal" type="button" @click="showModal('RonSwanson')">
+        <button
+          class="btn btn-success border-dark-blue"
+          data-target="#hangman-modal"
+          data-toggle="modal"
+          type="button"
+          @click="showModal('RonSwanson')"
+        >
           Try it
         </button>
         <a href="https://github.com/keugenio/marvelHangman" class="btn btn-success border-dark-blue" target="_blank">
@@ -145,11 +151,18 @@
           Marvel Hangman
         </h2>
         <h4 class="card-text text-white">
-          A twist on a classical game where we utilize the Marvel Developer API to get random images, their corresponding names and descriptions from their entire library of characters.  The app is written in Vue and is a component of this site, a single file component written in Vue as well.
+          A twist on a classical game where we utilize the Marvel Developer API to get random images, their corresponding names and descriptions from their entire library of characters.  The app is written in Vue and is a component of this site, which itself is a single file application.
         </h4>
       </div>
       <div class="card-footer d-flex justify-content-around my-3">
-        <button class="btn btn-success border-dark-blue" data-target="#hangman-modal" data-toggle="modal" type="button" @click="showModal('Marvel')">
+        <button
+          v-if="availableCharacters.length > 0"
+          class="btn btn-success border-dark-blue"
+          data-target="#hangman-modal"
+          data-toggle="modal"
+          type="button"
+          @click="showModal('Marvel')"
+        >
           Play
         </button>
         <a href="https://github.com/keugenio/kuieugenio.com" class="btn btn-success border-dark-blue" target="_blank">
@@ -162,6 +175,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Clicky from './Clicky'
 import RonSwanson from './RonSwanson'
 import Marvel from './Marvel'
@@ -170,8 +184,14 @@ export default {
   name: 'AboutMeCards',
   data () {
     return {
-      showEditModal: false
+      showEditModal: false,
+      charactersNotReady: true
     }
+  },
+  computed: {
+    ...mapGetters(
+      { availableCharacters: 'availableCharacters' }
+    )
   },
   methods: {
     showModal (modalName) {
@@ -298,6 +318,9 @@ export default {
       color: $color-dark-blue;
     }
   }
+  button {
+    white-space: nowrap!important;
+  }
   .profileImage {
     background-size: cover;
     width: 85%;
@@ -323,5 +346,11 @@ export default {
     &.profileImage4 {
       background-image: url('../assets/images/profilepicture_sm.jpg');
     }
+  }
+  .display-none {
+    display: none
+  }
+  .display-block {
+    display: block
   }
 </style>
